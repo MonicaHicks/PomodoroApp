@@ -1,5 +1,7 @@
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import * as Animatable from "react-native-animatable";
+import theme from "../assets/theme";
+import Footer from "./Footer";
 import Header from "./Header";
 import SeeStarJar from "./SeeStarJar";
 import SetTasks from "./SetTasks";
@@ -19,7 +21,7 @@ export default function HomeScreen({ navigation }) {
           style={styles.image}
         />
         <Text style={styles.subtitle}>
-          Click below to get the {"\n"} party started!
+          Click below to get the party started!
         </Text>
         <View style={styles.buttonContainer}>
           <SetUpTimerButton />
@@ -27,6 +29,7 @@ export default function HomeScreen({ navigation }) {
           <SeeStarJar />
         </View>
       </View>
+      <Footer />
     </View>
   );
 }
@@ -34,33 +37,32 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center", // Center children horizontally
-    justifyContent: "space-between",
+    backgroundColor: theme.colors.background,
+    justifyContent: "center",
   },
   body: {
     flex: 1,
-    justifyContent: "center", // Centers content vertically
-    alignItems: "center", // Centers content horizontally
+    alignItems: "center",
     width: "100%",
-    paddingHorizontal: 20,
+    paddingHorizontal: "5%",
   },
   bodyText: {
-    marginVertical: 30, // Increase the space
+    marginVertical: "6%",
     textAlign: "center",
     fontSize: 16,
   },
   welcomeText: {
+    padding: "10%",
     fontSize: 30,
     fontWeight: "bold",
-    color: "#333",
+    color: theme.colors.text,
     textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
-    color: "#666",
+    color: theme.colors.text,
     textAlign: "center",
-    marginVertical: 10,
+    marginTop: "10%",
   },
   button: {
     backgroundColor: "#2ecc71",
@@ -79,8 +81,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
+  buttonContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   image: {
-    width: width * 0.4, // Dynamically scale image size
-    height: height * 0.2,
+    width: "50%", // Dynamically scale image size
+    height: "35%",
   },
 });

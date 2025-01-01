@@ -5,8 +5,9 @@ const theme = {
     primary: "#3498db", // Blue
     secondary: "#2ecc71", // Green
     accent: "#e74c3c", // Red
-    background: "#f5f5f5", // Light gray
-    text: "#333333", // Dark gray
+    background: "#ffffff", // White
+    text: "#666666", // Dark gray
+    subtext: "#333333",
     buttonPrimary: "#349349",
   },
   fonts: {
