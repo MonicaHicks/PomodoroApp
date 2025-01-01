@@ -6,9 +6,10 @@ const theme = {
     secondary: "#2ecc71", // Green
     accent: "#e74c3c", // Red
     background: "#ffffff", // White
-    text: "#666666", // Dark gray
-    subtext: "#333333",
-    buttonPrimary: "#349349",
+    text: "#333333", // Dark gray
+    subtext: "#666666", // Light gray
+    buttonText: "#fff",
+    buttonPrimary: "#2ecc71",
   },
   fonts: {
     regular: "System", // Default font

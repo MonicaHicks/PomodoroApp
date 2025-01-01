@@ -2,12 +2,13 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Switch,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import * as Animatable from "react-native-animatable";
+import theme from "../assets/theme";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -32,16 +33,33 @@ export default function SetUpTimer() {
       <Header />
       <View style={styles.bodyContainer}>
         <Text style={styles.title}>Pomodoro Timer Setup</Text>
+        <Animatable.Image
+          animation="bounceIn"
+          duration={1500}
+          source={require("../assets/images/starrie.png")}
+          style={styles.image}
+        />
 
-        {/* Toggle Seconds/Minutes */}
-        <View style={styles.toggleContainer}>
-          <Text style={styles.label}>
-            Mode: {isSecondsMode ? "Seconds" : "Minutes"}
-          </Text>
-          <Switch
-            value={isSecondsMode}
-            onValueChange={(value) => setIsSecondsMode(value)}
-          />
+        {/* Mode Selection Buttons */}
+        <View style={styles.modeContainer}>
+          <TouchableOpacity
+            style={[
+              styles.modeButton,
+              !isSecondsMode && styles.activeModeButton,
+            ]}
+            onPress={() => setIsSecondsMode(false)}
+          >
+            <Text style={styles.modeButtonText}>Minutes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.modeButton,
+              isSecondsMode && styles.activeModeButton,
+            ]}
+            onPress={() => setIsSecondsMode(true)}
+          >
+            <Text style={styles.modeButtonText}>Seconds</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Work Time Input */}
@@ -94,7 +112,7 @@ export default function SetUpTimer() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.background,
   },
   bodyContainer: {
     flex: 1,
@@ -105,8 +123,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
     textAlign: "center",
+    color: theme.colors.text,
   },
   toggleContainer: {
     flexDirection: "row",
@@ -120,6 +138,27 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 5,
+    color: theme.colors.text,
+    fontWeight: "bold",
+  },
+  modeContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  modeButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+    borderRadius: 5,
+    backgroundColor: "#ddd",
+  },
+  activeModeButton: {
+    backgroundColor: "#3498db",
+  },
+  modeButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
   input: {
     height: 40,
@@ -127,9 +166,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
+    color: theme.colors.text,
   },
   button: {
-    backgroundColor: "#2ecc71",
+    backgroundColor: theme.colors.buttonPrimary,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -137,8 +177,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   buttonText: {
-    color: "#fff",
+    color: theme.colors.buttonText,
     fontWeight: "bold",
     fontSize: 16,
+  },
+  image: {
+    width: "35%",
+    height: "20%",
+    margin: "5%",
   },
 });
