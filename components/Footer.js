@@ -26,12 +26,12 @@ export default function Footer() {
 
       {/* Placeholder Button 1 */}
       <TouchableOpacity style={styles.button} onPress={() => {}}>
-        <Text style={styles.buttonText}>Placeholder 1</Text>
+        <Text style={styles.buttonText}>Tasks</Text>
       </TouchableOpacity>
 
       {/* Placeholder Button 2 */}
       <TouchableOpacity style={styles.button} onPress={() => {}}>
-        <Text style={styles.buttonText}>Placeholder 2</Text>
+        <Text style={styles.buttonText}>Star Jar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,13 +46,17 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     borderTopWidth: 1,
     borderColor: "#ddd",
-    height: "12%",
+    height: "10%",
   },
   button: {
     padding: 10,
+    marginBottom: "6%",
+    backgroundColor: theme.colors.background,
+    borderRadius: "15%",
   },
   buttonText: {
-    color: "#fff",
+    color: theme.colors.primary,
     fontSize: 16,
+    fontWeight: "bold",
   },
 });
