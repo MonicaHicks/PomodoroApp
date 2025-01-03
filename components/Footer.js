@@ -25,7 +25,10 @@ export default function Footer() {
       </TouchableOpacity>
 
       {/* Placeholder Button 1 */}
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("SetTasks")}
+      >
         <Text style={styles.buttonText}>Tasks</Text>
       </TouchableOpacity>
 
