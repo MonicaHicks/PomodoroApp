@@ -1,37 +1,139 @@
-import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import theme from "../assets/theme";
+import Footer from "./Footer";
+import Header from "./Header";
 
-const { width, height } = Dimensions.get("window");
+const TaskTag = ({ task, onDelete }) => (
+  <View style={styles.tag}>
+    <Text style={styles.tagText}>{task}</Text>
+    <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
+      <Text style={styles.tagText}>✕</Text>
+    </TouchableOpacity>
+  </View>
+);
 
 export default function SetTasks() {
+  const [tasks, setTasks] = useState([]);
+  const [currentTask, setCurrentTask] = useState("");
+
+  const addTask = () => {
+    if (currentTask.trim()) {
+      setTasks([...tasks, currentTask.trim()]);
+      setCurrentTask("");
+    }
+  };
+
+  const deleteTask = (index) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
+
   return (
-    <TouchableOpacity>
-      <LinearGradient colors={["#34eb77", "#2ecc71"]} style={styles.button}>
-        <Text style={styles.buttonText}>Set up Tasks</Text>
-      </LinearGradient>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <Header />
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Text style={styles.title}>Add Tasks for Your Work Period</Text>
+
+        {/* Task Input Field */}
+        <View style={styles.taskInputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter a task"
+            placeholderTextColor={theme.colors.textSecondary}
+            value={currentTask}
+            onChangeText={setCurrentTask}
+          />
+          <TouchableOpacity style={styles.addButton} onPress={addTask}>
+            <Text style={styles.addButtonText}>Add</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Task Tags */}
+        <View style={styles.tagsContainer}>
+          {tasks.map((task, index) => (
+            <TaskTag
+              key={index}
+              task={task}
+              onDelete={() => deleteTask(index)}
+            />
+          ))}
+        </View>
+      </ScrollView>
+      <Footer />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    height: 50,
-    width: width * 0.6,
-    backgroundColor: "#2ecc71",
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: "flex-start",
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: theme.colors.text,
+    marginVertical: 20,
+  },
+  taskInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginRight: 10,
+    color: theme.colors.text,
+  },
+  addButton: {
+    backgroundColor: theme.colors.buttonPrimary,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 2,
+    borderRadius: 5,
   },
-  buttonText: {
-    color: "#fff",
+  addButtonText: {
+    color: theme.colors.buttonText,
     fontWeight: "bold",
-    fontSize: 20,
-    textAlign: "center",
+  },
+  tagsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginVertical: 10,
+  },
+  tag: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: theme.colors.buttonPrimary,
+    borderRadius: "7%",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    margin: 5,
+  },
+  tagText: {
+    color: theme.colors.text,
+    fontSize: 16,
+  },
+  deleteButton: {
+    marginLeft: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

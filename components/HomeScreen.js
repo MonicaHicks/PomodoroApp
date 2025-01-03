@@ -3,8 +3,8 @@ import * as Animatable from "react-native-animatable";
 import theme from "../assets/theme";
 import Footer from "./Footer";
 import Header from "./Header";
-import SeeStarJar from "./SeeStarJar";
-import SetTasks from "./SetTasks";
+import SeeStarJarButton from "./SeeStarJarButton";
+import SetTasksButton from "./SetTasksButton";
 import SetUpTimerButton from "./SetUpTimerButton";
 const { width, height } = Dimensions.get("window");
 
@@ -25,8 +25,8 @@ export default function HomeScreen({ navigation }) {
         </Text>
         <View style={styles.buttonContainer}>
           <SetUpTimerButton />
-          <SetTasks />
-          <SeeStarJar />
+          <SetTasksButton />
+          <SeeStarJarButton />
         </View>
       </View>
       <Footer />
